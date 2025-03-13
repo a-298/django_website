@@ -33,7 +33,7 @@
                 </div>
                 <div class="form-group mb-4">
                     <label for="password">Password:</label>
-                    <input class="form-control" type="text" id="password" name="password" required>
+                    <input class="form-control" type="password" id="password" name="password" required>
                 </div>
                 <button class="btn btn-secondary mb-4" type="submit">Submit</button>
                 {% if messages %}
@@ -44,6 +44,9 @@
                 </div>
                 {% endif %}
             </form>
+            <p class="text-center mt-3">
+                Already have an account? <a href="{% url 'sign_in' %}">Sign in here</a>
+            </p>
         </div>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>

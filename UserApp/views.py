@@ -1,7 +1,9 @@
-from django.shortcuts import render
-from .forms import ContactForm
+from django.shortcuts import render, redirect
+from .forms import ContactForm, SignInForm
 from .models import Form
 from django.contrib import messages
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 
 
 def index(request):
@@ -15,12 +17,33 @@ def index(request):
             username = form.cleaned_data["username"]
             password = form.cleaned_data["password"]
 
+            user = User(username=username)
+            user.set_password(password)  # This hashes the password
+            user.save()
+
             Form.objects.create(first_name=first_name, last_name=last_name,
-                                email=email, birth_date=birth_date, username=username,
-                                password=password)
+                                email=email, birth_date=birth_date, username=user.username,
+                                password=user.password)
             messages.success(request, "Signed up successfully!")
     return render(request, "index.html")
 
 
 def sign_in(request):
-    return render(request, "sign_in.html")
+    if request.method == 'POST':
+        form = SignInForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+            else:
+                form.add_error(None, "Invalid username or password.")
+    else:
+        form = SignInForm()
+    return render(request, 'sign_in.html', {"form": form})
+
+
+def home(request):
+    return render(request, 'home.html')
