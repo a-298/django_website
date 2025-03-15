@@ -5,6 +5,13 @@
     <title>Title</title>
 </head>
 <body>
-
+{% block content %}
+  <h2>Register</h2>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}  <!-- Render the form fields -->
+    <button type="submit">Register</button>
+  </form>
+{% endblock %}
 </body>
 </html>
