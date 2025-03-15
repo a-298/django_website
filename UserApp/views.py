@@ -47,3 +47,4 @@ def sign_in(request):
 
 def home(request):
     return render(request, 'home.html')
+
