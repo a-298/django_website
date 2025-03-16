@@ -1,17 +1,18 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from .forms import CustomUserCreationForm
 
 
 def players_signup(request):
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
         else:
             form.add_error(None, "Invalid username or password.")
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
     return render(request, "sign_up.html", {"form": form})
 
 
