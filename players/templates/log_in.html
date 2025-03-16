@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Log In Page</title>
+</head>
+<body>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Django automatically generates the form fields -->
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>

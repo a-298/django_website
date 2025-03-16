@@ -42,9 +42,9 @@ def sign_in(request):
                 form.add_error(None, "Invalid username or password.")
     else:
         form = SignInForm()
-    return render(request, 'sign_in.html', {"form": form})
+    return render(request, 'log_in.html', {"form": form})
 
 
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'main_page.html')
 
