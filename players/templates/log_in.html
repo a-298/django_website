@@ -9,6 +9,11 @@
         {% csrf_token %}
         {{ form.as_p }}  <!-- Django automatically generates the form fields -->
         <button type="submit">Login</button>
+        {% if user.is_authenticated %}
+            <p>Welcome, {{ user.username }}! <a href="{% url 'log_out' %}">Logout</a></p>
+        {% else %}
+            <p><a href="{% url 'sign_up' %}">Sign Up</a> | <a href="{% url 'main_page' %}">Home</a></p>
+        {% endif %}
     </form>
 </body>
 </html>
