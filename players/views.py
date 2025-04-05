@@ -42,3 +42,7 @@ def players_logout(request):
 
 def players_profile(request):
     return render(request, "user_profile.html", {"user": request.user})
+
+
+def about(request):
+    return render(request, "about.html")
