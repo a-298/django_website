@@ -3,11 +3,12 @@
 {% block title %} User Profile {% endblock %}
 
 {% block content %}
-    <h2>User Details</h2>
-    <p>Username: {{ user.username }}</p>
-    <p>Email: {{ user.email }}</p>
-    <p>First Name: {{ user.first_name }}</p>
-    <p>Last Name: {{ user.last_name }}</p>
-    <p class="mb-5">Last Login: {{ user.last_login }}</p>
-    <p class="mt-5"><a href="{% url 'log_out' %}">Logout</a> | <a href="{% url 'main_page' %}">Home</a></p>
+    <div class="text-center mt-3">
+        <h2>User Details</h2>
+        <p>Username: {{ user.username }}</p>
+        <p>Email: {{ user.email }}</p>
+        <p>First Name: {{ user.first_name }}</p>
+        <p>Last Name: {{ user.last_name }}</p>
+        <p class="mb-5">Last Login: {{ user.last_login }}</p>
+    </div>
 {% endblock %}

@@ -8,6 +8,7 @@
 
 
 <div class="container">
+    <div class="d-flex justify-content-center flex-wrap">
     <div class="card m-3" style="width: 18rem;">
         <div class="card-body">
             <h5 class="card-title">You want to join us!</h5>
@@ -22,8 +23,6 @@
             <a href="{% url 'log_in' %}" class="btn btn-primary">Log In</a>
         </div>
     </div>
-    {% if user.is_authenticated %}
-    <p class="fs-3 mt-5">Welcome, {{ user.username }}! <a class="fs-3" href="{% url 'log_out' %}">Logout</a></p>
-    {% endif %}
+    </div>
 </div>
 {% endblock %}

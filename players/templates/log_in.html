@@ -3,16 +3,11 @@
 {% block title %} Log In Page {% endblock %}
 
 {% block content %}
-    <div class="text-center">
+    <div class="text-center mt-3">
         <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}  <!-- Django automatically generates the form fields -->
             <button type="submit" class="btn btn-primary">Login</button>
-            {% if user.is_authenticated %}
-                <p class="mt-5">Welcome, {{ user.username }}! <a href="{% url 'log_out' %}">Logout</a></p>
-            {% else %}
-                <p class="mt-5"><a href="{% url 'sign_up' %}">Sign Up</a> | <a href="{% url 'main_page' %}">Home</a></p>
-            {% endif %}
         </form>
     </div>
 {% endblock %}
