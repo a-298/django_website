@@ -3,12 +3,13 @@
 {% block title %} Sign Up Page {% endblock %}
 
 {% block content %}
-        <h2 class="text-center mt-2">Sign Up</h2>
-        <div class="d-flex justify-content-center flex-wrap mt-3">
-        <form method="POST">
-            {% csrf_token %}
-            {{ form.as_p }}  <!-- Render the form fields -->
-            <button class="btn btn-primary" type="submit">Register</button>
-        </form>
-        </div>
+{% load crispy_forms_tags %}
+<h2 class="text-center mt-2">Sign Up</h2>
+<div class="d-flex justify-content-center flex-wrap mt-3">
+    <form method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}  <!-- Render the form fields -->
+        <button class="btn btn-primary" type="submit">Register</button>
+    </form>
+</div>
 {% endblock %}

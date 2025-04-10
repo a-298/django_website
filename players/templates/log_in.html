@@ -3,11 +3,16 @@
 {% block title %} Log In Page {% endblock %}
 
 {% block content %}
-    <div class="text-center mt-3">
-        <form method="POST">
-            {% csrf_token %}
-            {{ form.as_p }}  <!-- Django automatically generates the form fields -->
-            <button type="submit" class="btn btn-primary">Login</button>
-        </form>
+{% load crispy_forms_tags %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}  <!-- Django automatically generates the form fields -->
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+        </div>
     </div>
+</div>
 {% endblock %}
