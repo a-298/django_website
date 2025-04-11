@@ -3,6 +3,8 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.urls import reverse
 from .forms import CustomUserCreationForm
+from django.contrib import messages
+from django.http import HttpResponseForbidden
 
 
 def players_signup(request):
@@ -46,3 +48,15 @@ def players_profile(request):
 
 def about(request):
     return render(request, "about.html")
+
+
+def delete_account(request):
+    if request.method == "GET":
+        return render(request, "delete_account.html")
+    elif request.method == "POST":
+        user = request.user
+        logout(request)
+        user.delete()
+        messages.success(request, "Your account has been successfully deleted.")
+        return redirect("main_page")
+    return HttpResponseForbidden()

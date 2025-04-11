@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %} Delete Account Page {% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm border-danger">
+                <div class="card-body text-center">
+                    <h2 class="text-danger mb-4">Are you sure?</h2>
+                    <p class="mb-4">This action will <strong>permanently delete</strong> your account. You can't undo this.</p>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger me-2">Yes, delete account</button>
+                        <a href="{% url 'user_profile' %}" class="btn btn-secondary">No, don't delete account</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
