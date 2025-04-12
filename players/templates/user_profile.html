@@ -11,5 +11,7 @@
         <p>Last Name: {{ user.last_name }}</p>
         <p class="mb-5">Last Login: {{ user.last_login }}</p>
         <a href="{% url 'delete_account' %}">Delete my Account</a>
+        &nbsp;
+        <a href="{% url 'password_reset' %}">Reset my Password</a>
     </div>
 {% endblock %}
