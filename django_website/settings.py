@@ -37,9 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'players',
     'crispy_forms',
     'crispy_bootstrap5',
+    'players.apps.PlayersConfig',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -135,3 +135,6 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'a298b112@gmail.com'
 EMAIL_HOST_PASSWORD = 'kiyn qvjo iixb dwgc'
 DEFAULT_FROM_EMAIL = 'a298b112@gmail.com'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'

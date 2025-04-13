@@ -1,17 +1,29 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block title %} User Profile {% endblock %}
 
 {% block content %}
-    <div class="text-center mt-3">
+<div class="container col-md-6 mt-4">
+    <div class="text-center">
         <h2>User Details</h2>
+        <img src="{{ user.profile.image.url }}" alt="Profile Picture" class="img-thumbnail mb-3" width="150">
         <p>Username: {{ user.username }}</p>
         <p>Email: {{ user.email }}</p>
         <p>First Name: {{ user.first_name }}</p>
         <p>Last Name: {{ user.last_name }}</p>
-        <p class="mb-5">Last Login: {{ user.last_login }}</p>
-        <a href="{% url 'delete_account' %}">Delete my Account</a>
-        &nbsp;
+        <p class="mb-4">Last Login: {{ user.last_login }}</p>
+    </div>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary">Update Picture</button>
+    </form>
+
+    <div class="mt-4 text-center">
+        <a href="{% url 'delete_account' %}">Delete my Account</a> |
         <a href="{% url 'password_reset' %}">Reset my Password</a>
     </div>
+</div>
 {% endblock %}
