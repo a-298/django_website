@@ -4,26 +4,45 @@
 {% block title %} User Profile {% endblock %}
 
 {% block content %}
-<div class="container col-md-6 mt-4">
-    <div class="text-center">
-        <h2>User Details</h2>
-        <img src="{{ user.profile.image.url }}" alt="Profile Picture" class="img-thumbnail mb-3" width="150">
-        <p>Username: {{ user.username }}</p>
-        <p>Email: {{ user.email }}</p>
-        <p>First Name: {{ user.first_name }}</p>
-        <p>Last Name: {{ user.last_name }}</p>
-        <p class="mb-4">Last Login: {{ user.last_login }}</p>
-    </div>
-
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <button type="submit" class="btn btn-primary">Update Picture</button>
-    </form>
-
-    <div class="mt-4 text-center">
-        <a href="{% url 'delete_account' %}">Delete my Account</a> |
-        <a href="{% url 'password_reset' %}">Reset my Password</a>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <div class="mb-4">
+                <img src="{{ user.profile.image.url }}" alt="Profile Picture" class="rounded-circle mb-3" width="120"
+                     height="120">
+                <h2 class="mb-0">Welcome, {{ user.username }}!</h2>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-6">
+                    <h5><strong>Personal Information</strong></h5>
+                    <p><strong>Username</strong><br>{{ user.username }}</p>
+                    <p><strong>Full Name</strong><br>{{ user.first_name }} {{ user.last_name }}</p>
+                    <p><strong>Email</strong><br>{{ user.email }}</p>
+                    <p><strong>Last Login</strong><br>{{ user.last_login }}</p>
+                </div>
+                <div class="col-6">
+                    <h5><strong>About</strong></h5>
+                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidun
+                        t ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
+                        duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
+                        dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+                        tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
+                        accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata.</p>
+                </div>
+            </div>
+            <form method="POST" enctype="multipart/form-data" class="mt-4">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="id_image" class="form-label"><strong>Upload Your Picture</strong></label>
+                    <input type="file" name="image" class="form-control" id="id_image">
+                </div>
+                <button type="submit" class="btn btn-primary">Update Picture</button>
+            </form>
+            <br>
+            <a href="{% url 'password_reset' %}" class="btn btn-warning">Reset Password</a>
+            <a href="{% url 'delete_account' %}" class="btn btn-danger">Delete Account</a>
+        </div>
     </div>
 </div>
 {% endblock %}
