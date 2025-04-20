@@ -6,6 +6,7 @@ from .forms import CustomUserCreationForm
 from django.contrib import messages
 from django.http import HttpResponseForbidden
 from .forms import ProfileUpdateForm
+from django.core.mail import mail_admins
 
 
 class CustomPasswordResetView(PasswordResetView):
@@ -21,6 +22,10 @@ def players_signup(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
+            mail_admins(
+                subject="New User",
+                message=f"The user {user.username}({user.email}) has created their account."
+            )
             return redirect("log_in")
     else:
         form = CustomUserCreationForm()
@@ -74,6 +79,10 @@ def delete_account(request):
         user = request.user
         logout(request)
         user.delete()
+        mail_admins(
+            subject="User Deleted Account",
+            message=f"The user {user.username}({user.email}) has deleted their account."
+        )
         messages.success(request, "Your account has been successfully deleted.")
         return redirect("main_page")
     return HttpResponseForbidden()
