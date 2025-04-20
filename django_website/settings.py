@@ -139,3 +139,5 @@ DEFAULT_FROM_EMAIL = ''
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+ADMINS = [('Admin', 'a298b112@gmail.com')]
