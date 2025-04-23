@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %} Latest Posts {% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  <div class="d-flex justify-content-end mb-3">
+    <a href="{% url 'blog:create_posts' %}" class="btn btn-success shadow-sm">
+      + Create New Post
+    </a>
+  </div>
+  {% endif %}
+  <div class="container mt-4">
+    <h2 class="mb-4">Latest Blog Posts</h2>
+    {% for post in posts %}
+    <div class="mb-4 p-3 border rounded shadow-sm">
+      <h4><a href="{% url 'blog:specific_posts' post.id %}">{{ post.title }}</a></h4>
+      <small class="text-muted">Posted on {{ post.date|date:"F d, Y" }}</small>
+      <p class="mt-2">{{ post.post|truncatewords:54 }}</p>
+    </div>
+    {% empty %}
+    <p>No posts yet!</p>
+    {% endfor %}
+  </div>
+{% endblock %}

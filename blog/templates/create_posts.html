@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %} Create Post {% endblock %}
+{% block title %} Create Posts {% endblock %}
 
 {% block content %}
 {% load crispy_forms_tags %}
-<body>
+    <body>
     <div class="container mt-4">
         <h2>Create a New Blog Post</h2>
         <form method="POST">
@@ -13,6 +13,6 @@
             <button type="submit" class="btn btn-primary">Publish</button>
         </form>
     </div>
-</body>
-</html>
+    </body>
+    </html>
 {% endblock %}

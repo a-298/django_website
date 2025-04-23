@@ -18,10 +18,7 @@
                 <div class="navbar-nav me-auto">
                     <a class="nav-link" href="{% url 'sign_up' %}">Sign Up</a>
                     <a class="nav-link" href="{% url 'about' %}">About</a>
-                    <a class="nav-link" href="{% url 'blog:all_posts' %}">All Blogs</a>
-                    {% if user.is_authenticated %}
-                    <a class="nav-link" href="{% url 'blog:create_posts' %}">Write Blogs</a>
-                    {% endif %}
+                    <a class="nav-link" href="{% url 'blog:latest_posts' %}">Blog</a>
                 </div>
                 <div class="navbar-nav ms-auto">
                     {% if not user.is_authenticated %}
