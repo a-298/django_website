@@ -1,13 +1,29 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .forms import PostForm
 from .models import Post
+from django.contrib import messages
 
 
 def create_posts_view(request):
     if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid():
+            title = form.cleaned_data["title"]
+            author = form.cleaned_data["author"]
+            category = form.cleaned_data["category"]
+            post = form.cleaned_data["post"]
+            exists = Post.objects.filter(
+                title=title,
+                author=author,
+                category=category,
+                post=post
+            ).exists()
+            if exists:
+                messages.warning(request, "A post with the same title, author, category, and content already exists.")
+                return render(request, "create_posts.html", {"form": form})
             form.save()
+            messages.success(request, "Post created successfully!")
+            return redirect("blog:latest_posts")
     else:
         form = PostForm()
     return render(request, "create_posts.html", {"form": form})
