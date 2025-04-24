@@ -15,7 +15,7 @@
     {% for post in posts %}
     <div class="mb-4 p-3 border rounded shadow-sm">
       <h4><a href="{% url 'blog:specific_posts' post.id %}">{{ post.title }}</a></h4>
-      <small class="text-muted">Posted on {{ post.date|date:"F d, Y" }}</small>
+      <small class="text-muted">Posted on {{ post.date|date:"F d, Y" }} by {{ post.author }}</small>
       <p class="mt-2">{{ post.post|truncatewords:54 }}</p>
     </div>
     {% empty %}
