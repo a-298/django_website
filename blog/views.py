@@ -25,7 +25,7 @@ def create_posts_view(request):
             messages.success(request, "Post created successfully!")
             return redirect("blog:latest_posts")
     else:
-        form = PostForm()
+        form = PostForm(user=request.user)
     return render(request, "create_posts.html", {"form": form})
 
 
