@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .forms import PostForm
 from .models import Post
 from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def create_posts_view(request):
@@ -30,7 +31,17 @@ def create_posts_view(request):
 
 
 def latest_posts_view(request):
-    posts = Post.objects.order_by("-date")[:5]
+    posts = Post.objects.order_by("-date")
+    paginator = Paginator(posts, 5)
+
+    page = request.GET.get("page")
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+
     return render(request, "latest_posts.html", {"posts": posts})
 
 
