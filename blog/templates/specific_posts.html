@@ -3,8 +3,27 @@
 {% block title %} Post {{ post.id }} {% endblock %}
 
 {% block content %}
-  <h1>{{ post.title }}</h1>
-  <h3>Written by: {{ post.author }}</h3>
-  <h3>Written on: {{ post.date }}</h3>
-  <p>{{ post.post }}</p>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-9">
+      <article class="card mb-4 border-0 shadow-sm">
+        <div class="card-body">
+          <h1 class="display-5 fw-bold mb-3">{{ post.title }}</h1>
+          <div class="d-flex align-items-center mb-4 text-muted">
+            <div class="me-3">
+              <span>{{ post.author }}</span>
+            </div>
+            <div class="me-3">
+              <span>{{ post.date|date:"F j, Y h:i" }}</span>
+              <span>{{ post.category }}</span>
+            </div>
+          </div>
+          <div class="post-content fs-5 lh-base">
+            {{ post.post|linebreaks }}
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
 {% endblock %}
