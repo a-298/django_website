@@ -71,3 +71,18 @@ def specific_posts_view(request, post_id):
         if not request.user.is_authenticated or str(request.user) != post.author:
             raise Http404("Post not found")
     return render(request, "specific_posts.html", {"post": post})
+
+
+def edit_posts_view(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    if str(request.user) != post.author:
+        return redirect("blog:specific_posts", post_id=post.id)
+    if request.method == 'POST':
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('blog:specific_posts', post_id=post_id)
+    else:
+        form = PostForm(instance=post)
+
+    return render(request, 'edit_posts.html', {'form': form})
