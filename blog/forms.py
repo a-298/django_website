@@ -11,4 +11,4 @@ class PostForm(forms.ModelForm):
         user = kwargs.pop('user', None)  # Get user from kwargs
         super().__init__(*args, **kwargs)
         if user:  # If user is logged in
-            self.initial['author'] = f"{user.first_name} {user.last_name}"
+            self.initial['author'] = f"{user.username}"
