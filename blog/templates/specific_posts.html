@@ -6,6 +6,11 @@
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-lg-9">
+      {% if user.username == post.author %}
+      <div class="mt-3">
+        <a href="{% url 'blog:edit_posts' post.id%}" class="btn btn-secondary">Edit</a>
+      </div>
+      {% endif %}
       <article class="card mb-4 border-0 shadow-sm">
         <div class="card-body">
           <h1 class="display-5 fw-bold mb-3">{{ post.title }}</h1>
@@ -18,7 +23,7 @@
               <span>{{ post.category }}</span>
             </div>
             {% if not post.is_posted %}
-              <span class="badge bg-warning text-dark">Draft</span>
+            <span class="badge bg-warning text-dark">Draft</span>
             {% endif %}
           </div>
           <div class="post-content fs-5 lh-base">
@@ -45,11 +50,6 @@
             </div>
           </form>
         </div>
-      </div>
-      {% endif %}
-      {% if user.username == post.author %}
-      <div class="mt-3">
-        <a href="{% url 'blog:edit_posts' post.id%}" class="btn btn-secondary">Edit</a>
       </div>
       {% endif %}
     </div>
