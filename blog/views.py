@@ -1,8 +1,6 @@
-from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.http import require_http_methods
-
 from .forms import PostForm
 from .models import Post
 from django.contrib import messages
@@ -37,16 +35,13 @@ def create_posts_view(request):
 
 def latest_posts_view(request):
     if request.user.is_authenticated:
-        # Show published posts + user's own drafts
         posts = Post.objects.filter(
             Q(is_posted=True) |
             Q(author=request.user, is_posted=False)
-        ).distinct().order_by('-date')
+        ).distinct().order_by("-date")
     else:
-        # Show only published posts
-        posts = Post.objects.filter(is_posted=True).order_by('-date')
+        posts = Post.objects.filter(is_posted=True).order_by("-date")
     paginator = Paginator(posts, 5)
-
     page = request.GET.get("page")
     try:
         posts = paginator.page(page)
@@ -54,19 +49,17 @@ def latest_posts_view(request):
         posts = paginator.page(1)
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
-
     return render(request, "latest_posts.html", {"posts": posts})
 
 
 @require_http_methods(["GET", "POST"])
 def specific_posts_view(request, post_id):
     post = get_object_or_404(Post, id=post_id)
-    if request.method == 'POST':
+    if request.method == "POST":
         if str(request.user) == post.author and not post.is_posted:
             post.is_posted = True
             post.save()
-            return redirect('blog:specific_posts', post_id=post.id)
-
+            return redirect("blog:specific_posts", post_id=post.id)
     if not post.is_posted:
         if not request.user.is_authenticated or str(request.user) != post.author:
             raise Http404("Post not found")
@@ -77,12 +70,11 @@ def edit_posts_view(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     if str(request.user) != post.author:
         return redirect("blog:specific_posts", post_id=post.id)
-    if request.method == 'POST':
+    if request.method == "POST":
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
             form.save()
-            return redirect('blog:specific_posts', post_id=post_id)
+            return redirect("blog:specific_posts", post_id=post_id)
     else:
         form = PostForm(instance=post)
-
-    return render(request, 'edit_posts.html', {'form': form})
+    return render(request, "edit_posts.html", {"form": form})

@@ -31,7 +31,6 @@
           </div>
         </div>
       </article>
-      {# Publish form - only shows for author on unpublished posts #}
       {% if request.user.is_authenticated and user.username == post.author and not post.is_posted %}
       <div class="card border-warning mt-3">
         <div class="card-body">
