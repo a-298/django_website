@@ -60,6 +60,10 @@ def specific_posts_view(request, post_id):
             post.is_posted = True
             post.save()
             return redirect("blog:specific_posts", post_id=post.id)
+        else:
+            post.is_posted = False
+            post.save()
+            return redirect("blog:specific_posts", post_id=post.id)
     if not post.is_posted:
         if not request.user.is_authenticated or str(request.user) != post.author:
             raise Http404("Post not found")

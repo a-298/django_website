@@ -32,7 +32,6 @@
         </div>
       </article>
       {% if request.user.is_authenticated and user.username == post.author and not post.is_posted %}
-      <div class="card border-warning mt-3">
         <div class="card-body">
           <form method="post" action="{% url 'blog:specific_posts' post.id %}">
             {% csrf_token %}
@@ -49,7 +48,25 @@
             </div>
           </form>
         </div>
-      </div>
+      {% endif %}
+
+      {% if request.user.is_authenticated and user.username == post.author and post.is_posted %}
+        <div class="card-body">
+          <form method="post" action="{% url 'blog:specific_posts' post.id %}">
+            {% csrf_token %}
+            <div class="d-flex align-items-center">
+              <div class="form-check form-switch me-3">
+                <input class="form-check-input" type="checkbox" id="publishSwitch" name="publish">
+                <label class="form-check-label" for="publishSwitch">
+                  Publish this post
+                </label>
+              </div>
+              <button type="submit" class="btn btn-sm btn-success">
+                <i class="bi bi-check-circle"></i> Confirm
+              </button>
+            </div>
+          </form>
+        </div>
       {% endif %}
     </div>
   </div>
