@@ -42,7 +42,13 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'players.apps.PlayersConfig',
     'blog.apps.BlogConfig',
+    'django_summernote',
 ]
+
+SUMMERNOTE_CONFIG = {
+    'width': '100%',
+    'height': '300px',
+}
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = 'bootstrap5'

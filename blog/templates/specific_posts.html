@@ -27,7 +27,7 @@
             {% endif %}
           </div>
           <div class="post-content fs-5 lh-base">
-            {{ post.post|linebreaks }}
+            {{ post.post|safe }}
           </div>
         </div>
       </article>
@@ -50,7 +50,7 @@
         </div>
       {% endif %}
 
-      {% if request.user.is_authenticated and user.username == post.author and post.is_posted %}
+      {% if request.user.is_authenticated and user.username == post.author and   post.is_posted %}
         <div class="card-body">
           <form method="post" action="{% url 'blog:specific_posts' post.id %}">
             {% csrf_token %}
