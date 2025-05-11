@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 SUMMERNOTE_CONFIG = {
     'width': '100%',
     'height': '300px',
+    'attachment_model': 'django_summernote.Attachment',
 }
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"

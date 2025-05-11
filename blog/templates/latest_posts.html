@@ -2,6 +2,8 @@
 
 {% block title %} Latest Posts {% endblock %}
 
+{% load custom_filters %}
+
 {% block content %}
 
 
@@ -19,7 +21,7 @@
   <div class="mb-4 p-3 border rounded shadow-sm">
     <h4><a href="{% url 'blog:specific_posts' post.id %}">{{ post.title }}</a></h4>
     <small class="text-muted">Posted on {{ post.date|date:"F d, Y h:i" }} by {{ post.author }}</small>
-    <p class="mt-2">{{ post.post|truncatewords:54|safe }}</p>
+    <p class="mt-2">{{ post.post|remove_images_only|truncatewords:54|safe }}</p>
   </div>
   {% empty %}
   <p>No posts yet!</p>
