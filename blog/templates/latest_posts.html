@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %} Latest Posts {% endblock %}
+
+{% load custom_filters %}
+
+{% block content %}
+
+
+
+<div class="container mt-4">
+  {% if user.is_authenticated %}
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Latest Blogs</h2>
+    <a href="{% url 'blog:create_posts' %}" class="btn btn-success shadow-sm">
+      + Write New Post
+    </a>
+  </div>
+  {% endif %}
+  {% for post in posts %}
+  <div class="mb-4 p-3 border rounded shadow-sm">
+    <h4><a href="{% url 'blog:specific_posts' post.id %}">{{ post.title }}</a></h4>
+    <small class="text-muted">Posted on {{ post.date|date:"F d, Y h:i" }} by {{ post.author }}</small>
+    <p class="mt-2">{{ post.post|remove_images_only|truncatewords:54|safe }}</p>
+  </div>
+  {% empty %}
+  <p>No posts yet!</p>
+  {% endfor %}
+</div>
+
+
+
+<nav aria-label="Page navigation">
+  <ul class="pagination justify-content-center">
+    {% if posts.has_previous %}
+    <li class="page-item">
+      <a class="page-link" href="?page=1" aria-label="First">
+        <span aria-hidden="true">&laquo;&laquo;</span>
+      </a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="?page={{ posts.previous_page_number }}" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    {% endif %}
+    {% for num in posts.paginator.page_range %}
+    {% if posts.number == num %}
+    <li class="page-item active">
+      <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+    </li>
+    {% elif num > posts.number|add:'-3' and num < posts.number|add:'3' %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+    </li>
+    {% endif %}
+    {% endfor %}
+    {% if posts.has_next %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ posts.next_page_number }}" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="?page={{ posts.paginator.num_pages }}" aria-label="Last">
+        <span aria-hidden="true">&raquo;&raquo;</span>
+      </a>
+    </li>
+    {% endif %}
+  </ul>
+</nav>
+{% endblock %}

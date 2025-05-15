@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %} Create Posts {% endblock %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+    <body>
+    <div class="container mt-4">
+        <h2>Create a New Blog Post</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" name="is_posted" id="is_posted"
+                       {% if form.instance.is_posted %}checked{% endif %}>
+                <label class="form-check-label" for="is_posted">
+                    Publish this post (make visible to everyone)
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary">Publish</button>
+        </form>
+    </div>
+    </body>
+{% endblock %}

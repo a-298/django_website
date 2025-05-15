@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -40,7 +41,15 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'players.apps.PlayersConfig',
+    'blog.apps.BlogConfig',
+    'django_summernote',
 ]
+
+SUMMERNOTE_CONFIG = {
+    'width': '100%',
+    'height': '300px',
+    'attachment_model': 'django_summernote.Attachment',
+}
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
@@ -54,6 +63,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 ROOT_URLCONF = 'django_website.urls'
 
