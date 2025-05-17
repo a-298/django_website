@@ -19,6 +19,7 @@
                     <a class="nav-link" href="{% url 'sign_up' %}">Sign Up</a>
                     <a class="nav-link" href="{% url 'about' %}">About</a>
                     <a class="nav-link" href="{% url 'blog:latest_posts' %}">Blog</a>
+                    <a class="nav-link" href="{% url 'time_management:home' %}">Time Management</a>
                 </div>
                 <div class="navbar-nav ms-auto">
                     {% if not user.is_authenticated %}

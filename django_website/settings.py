@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'players.apps.PlayersConfig',
     'blog.apps.BlogConfig',
+    'time_management.apps.TimeManagementConfig',
     'django_summernote',
 ]
 
