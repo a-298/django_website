@@ -11,10 +11,10 @@
 
         <div class="col mb-5">
             <div class="card mt-5" style="width: 18rem;">
-                <h1 class="display-2 text-center">01h:30m</h1>
                 <div class="card-body">
+                <h1 class="display-2 text-center">{{ console_hours }}h{{ console_minutes }}m</h1>
                     <h5 class="card-title text-center">CONSOLE</h5>
-                    <p class="card-text">Today: dd/mm/yyyy, <br> you passed 01 hour and 30 minutes on your CONSOLE.</p>
+                    <p class="card-text">Today: {{ time }}, <br> you passed {{ console_hours }} hour(s) and {{ console_minutes }} minute(s) on your CONSOLE.</p>
                 </div>
             </div>
         </div>
@@ -22,9 +22,9 @@
         <div class="col mb-5">
             <div class="card mt-5" style="width: 18rem;">
                 <div class="card-body">
-                    <h1 class="display-2 text-center">01h:30m</h1>
+                    <h1 class="display-2 text-center">{{ computer_hours }}h{{ computer_minutes }}m</h1>
                     <h5 class="card-title text-center">COMPUTER</h5>
-                    <p class="card-text">Today: dd/mm/yyyy, <br> you passed 01 hour and 30 minutes on your COMPUTER.</p>
+                    <p class="card-text">Today: {{ time }}, <br> you passed {{ computer_hours }} hour(s) and {{ computer_minutes }} minute(s) on your COMPUTER.</p>
                 </div>
             </div>
         </div>
@@ -32,9 +32,9 @@
         <div class="col mb-5">
             <div class="card mt-5" style="width: 18rem;">
                 <div class="card-body">
-                    <h1 class="display-2 text-center">01h:30m</h1>
+                    <h1 class="display-2 text-center">{{ mobile_hours }}h{{ mobile_minutes }}m</h1>
                     <h5 class="card-title text-center">MOBILE</h5>
-                    <p class="card-text">Today: dd/mm/yyyy, <br> you passed 01 hour and 30 minutes on your MOBILE.</p>
+                    <p class="card-text">Today: {{ time }}, <br> you passed {{ mobile_hours }} hour(s) and {{ mobile_minutes }} minute(s) on your MOBILE.</p>
                 </div>
             </div>
         </div>
@@ -42,9 +42,9 @@
         <div class="col mb-5">
             <div class="card mt-5" style="width: 18rem;">
                 <div class="card-body">
-                    <h1 class="display-2 text-center">01h:30m</h1>
+                    <h1 class="display-2 text-center">{{ television_hours }}h{{ television_minutes }}m</h1>
                     <h5 class="card-title text-center">TELEVISION</h5>
-                    <p class="card-text">Today: dd/mm/yyyy, <br> you passed 01 hour and 30 minutes on your TELEVISION.</p>
+                    <p class="card-text">Today: {{ time }}, <br> you passed {{ television_hours }} hour(s) and {{ television_minutes }} minute(s) on your TELEVISION.</p>
                 </div>
             </div>
         </div>
