@@ -7,7 +7,7 @@ from django.utils import timezone
 
 def home(request):
     today = timezone.now().date()
-    entries = Time.objects.filter(user=request.user.username, date=today)
+    entries = Time.objects.filter(user=request.user.id, date=today)
 
     totals = {
         'console': sum(i.console_time for i in entries),
@@ -19,7 +19,9 @@ def home(request):
     if request.method == "POST":
         form = TimeForm(request.POST)
         if form.is_valid():
-            form.save()
+            obj = form.save(commit=False)
+            obj.user = request.user.id
+            obj.save()
             messages.success(request, "Your data was successfully recorded.")
             return redirect("time_management:home")
     else:

@@ -5,4 +5,4 @@ from .models import Time
 class TimeForm(forms.ModelForm):
     class Meta:
         model = Time
-        fields = ["user", "console_time", "computer_time", "mobile_time", "television_time"]
+        fields = ["console_time", "computer_time", "mobile_time", "television_time"]

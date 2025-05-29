@@ -12,7 +12,7 @@ class PostForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        user = kwargs.pop('user', None)  # Get user from kwargs
+        user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
-        if user:  # If user is logged in
+        if user:
             self.initial['author'] = f"{user.username}"

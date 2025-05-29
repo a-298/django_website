@@ -3,7 +3,7 @@ from django.db import models
 
 
 class Time(models.Model):
-    user = models.CharField(max_length=100)
+    user = models.IntegerField()
     date = models.DateField(default=timezone.now)
     console_time = models.IntegerField()
     computer_time = models.IntegerField()
