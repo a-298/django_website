@@ -6,42 +6,45 @@ from django.utils import timezone
 
 
 def home(request):
-    today = timezone.now().date()
-    entries = Time.objects.filter(user=request.user.id, date=today)
-
-    totals = {
-        'console': sum(i.console_time for i in entries),
-        'computer': sum(i.computer_time for i in entries),
-        'mobile': sum(i.mobile_time for i in entries),
-        'television': sum(i.television_time for i in entries),
-    }
-
-    if request.method == "POST":
-        form = TimeForm(request.POST)
-        if form.is_valid():
-            obj = form.save(commit=False)
-            obj.user = request.user.id
-            obj.save()
-            messages.success(request, "Your data was successfully recorded.")
-            return redirect("time_management:home")
+    if not request.user.is_authenticated:
+        return redirect('log_in')
     else:
-        form = TimeForm()
-        context = {
-            "form": form,
-            "time": today,
-            "date": today,
+        today = timezone.now().date()
+        entries = Time.objects.filter(user=request.user.id, date=today)
 
-            "console_hours": totals["console"] // 60,
-            "console_minutes": totals["console"] % 60,
-
-            "computer_hours": totals["computer"] // 60,
-            "computer_minutes": totals["computer"] % 60,
-
-            "mobile_hours": totals["mobile"] // 60,
-            "mobile_minutes": totals["mobile"] % 60,
-
-            "television_hours": totals["television"] // 60,
-            "television_minutes": totals["television"] % 60,
+        totals = {
+            'console': sum(i.console_time for i in entries),
+            'computer': sum(i.computer_time for i in entries),
+            'mobile': sum(i.mobile_time for i in entries),
+            'television': sum(i.television_time for i in entries),
         }
-    return render(request, "home.html", context)
+
+        if request.method == "POST":
+            form = TimeForm(request.POST)
+            if form.is_valid():
+                obj = form.save(commit=False)
+                obj.user = request.user.id
+                obj.save()
+                messages.success(request, "Your data was successfully recorded.")
+                return redirect("time_management:home")
+        else:
+            form = TimeForm()
+            context = {
+                "form": form,
+                "time": today,
+                "date": today,
+
+                "console_hours": totals["console"] // 60,
+                "console_minutes": totals["console"] % 60,
+
+                "computer_hours": totals["computer"] // 60,
+                "computer_minutes": totals["computer"] % 60,
+
+                "mobile_hours": totals["mobile"] // 60,
+                "mobile_minutes": totals["mobile"] % 60,
+
+                "television_hours": totals["television"] // 60,
+                "television_minutes": totals["television"] % 60,
+            }
+        return render(request, "home.html", context)
 
