@@ -19,6 +19,22 @@ def home(request):
             'television': sum(i.television_time for i in entries),
         }
 
+        context = {
+            "time": today,
+
+            "console_hours": totals["console"] // 60,
+            "console_minutes": totals["console"] % 60,
+
+            "computer_hours": totals["computer"] // 60,
+            "computer_minutes": totals["computer"] % 60,
+
+            "mobile_hours": totals["mobile"] // 60,
+            "mobile_minutes": totals["mobile"] % 60,
+
+            "television_hours": totals["television"] // 60,
+            "television_minutes": totals["television"] % 60
+        }
+
         if request.method == "POST":
             form = TimeForm(request.POST)
             if form.is_valid():
@@ -29,22 +45,6 @@ def home(request):
                 return redirect("time_management:home")
         else:
             form = TimeForm()
-            context = {
-                "form": form,
-                "time": today,
-                "date": today,
-
-                "console_hours": totals["console"] // 60,
-                "console_minutes": totals["console"] % 60,
-
-                "computer_hours": totals["computer"] // 60,
-                "computer_minutes": totals["computer"] % 60,
-
-                "mobile_hours": totals["mobile"] // 60,
-                "mobile_minutes": totals["mobile"] % 60,
-
-                "television_hours": totals["television"] // 60,
-                "television_minutes": totals["television"] % 60,
-            }
+            context["form"] = form
         return render(request, "home.html", context)
 

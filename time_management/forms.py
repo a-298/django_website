@@ -1,8 +1,12 @@
 from django import forms
 from .models import Time
 
-
 class TimeForm(forms.ModelForm):
+    console_time = forms.IntegerField(min_value=0)
+    computer_time = forms.IntegerField(min_value=0)
+    mobile_time = forms.IntegerField(min_value=0)
+    television_time = forms.IntegerField(min_value=0)
+
     class Meta:
         model = Time
         fields = ["console_time", "computer_time", "mobile_time", "television_time"]
