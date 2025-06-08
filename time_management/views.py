@@ -5,12 +5,18 @@ from .models import Time
 from django.utils import timezone
 
 
-def home(request):
-    if not request.user.is_authenticated:
-        return redirect('log_in')
-    else:
-        today = timezone.now().date()
-        entries = Time.objects.filter(user=request.user.id, date=today)
+def home(request, timeframe="daily"):
+        if not request.user.is_authenticated:
+            return redirect('log_in')
+        elif timeframe == "daily":
+            today = timezone.now().date()
+            entries = Time.objects.filter(user=request.user.id, date=today)
+        elif timeframe == "weekly":
+            week = timezone.now().date() - timezone.timedelta(days=7)
+            entries = Time.objects.all().filter(user=request.user.id, date__gte=week)
+        else:
+            month = timezone.now().date() - timezone.timedelta(days=30)
+            entries = Time.objects.all().filter(user=request.user.id, date__gte=month)
 
         totals = {
             'console': sum(i.console_time for i in entries),
@@ -19,8 +25,15 @@ def home(request):
             'television': sum(i.television_time for i in entries),
         }
 
+        if timeframe == "daily":
+            time = "Today"
+        elif timeframe == "weekly":
+            time = "This week"
+        else:
+            time = "This month"
+
         context = {
-            "time": today,
+            "time": time,
 
             "console_hours": totals["console"] // 60,
             "console_minutes": totals["console"] % 60,
