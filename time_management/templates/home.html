@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %} Time Management {% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2><a href="{% url 'time_management:home' 'daily' %}">Daily Statistics</a> | <a href="{% url 'time_management:home' 'weekly' %}">Weekly Statistics</a> | <a href="{% url 'time_management:home' 'monthly' %}">Monthly Statistics</a></h2>
+    <div class="row">
+
+        <div class="col mb-5">
+            <div class="card mt-5" style="width: 18rem;">
+                <div class="card-body">
+                <h1 class="display-2 text-center">{{ console_hours }}h{{ console_minutes }}m</h1>
+                    <h5 class="card-title text-center">CONSOLE</h5>
+                    <p class="card-text">{{ time }}, <br> you passed {{ console_hours }} hour(s) and {{ console_minutes }} minute(s) on your CONSOLE.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col mb-5">
+            <div class="card mt-5" style="width: 18rem;">
+                <div class="card-body">
+                    <h1 class="display-2 text-center">{{ computer_hours }}h{{ computer_minutes }}m</h1>
+                    <h5 class="card-title text-center">COMPUTER</h5>
+                    <p class="card-text">{{ time }}, <br> you passed {{ computer_hours }} hour(s) and {{ computer_minutes }} minute(s) on your COMPUTER.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col mb-5">
+            <div class="card mt-5" style="width: 18rem;">
+                <div class="card-body">
+                    <h1 class="display-2 text-center">{{ mobile_hours }}h{{ mobile_minutes }}m</h1>
+                    <h5 class="card-title text-center">MOBILE</h5>
+                    <p class="card-text">{{ time }}, <br> you passed {{ mobile_hours }} hour(s) and {{ mobile_minutes }} minute(s) on your MOBILE.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col mb-5">
+            <div class="card mt-5" style="width: 18rem;">
+                <div class="card-body">
+                    <h1 class="display-2 text-center">{{ television_hours }}h{{ television_minutes }}m</h1>
+                    <h5 class="card-title text-center">TELEVISION</h5>
+                    <p class="card-text">{{ time }}, <br> you passed {{ television_hours }} hour(s) and {{ television_minutes }} minute(s) on your TELEVISION.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<div class="container mt-5">
+    <h2 class="mb-5">Write your time</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary mb-5 mt-5">Submit</button>
+    </form>
+</div>
+{% endblock %}
