@@ -59,5 +59,5 @@ def home(request, timeframe="daily"):
         else:
             form = TimeForm()
             context["form"] = form
-        return render(request, "home.html", context)
+        return render(request, "quotes.html", context)
 

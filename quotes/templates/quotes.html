@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %} Create Posts {% endblock %}
+
+{% block content %}
+<h1 class="text-center mt-5">Today's Quote</h1>
+<hr>
+<h3 class="text-center mt-5">{{ quote.quote }}</h3>
+<h4 class="text-center">{{ quote.author }}, {{ quote.book }}</h4>
+{% endblock %}

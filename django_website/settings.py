@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'time_management.apps.TimeManagementConfig',
     'django_summernote',
+    'quotes.apps.QuotesConfig',
 ]
 
 SUMMERNOTE_CONFIG = {
